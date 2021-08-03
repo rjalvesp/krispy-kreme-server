@@ -1,0 +1,80 @@
+{
+  "name": "krispy-kreme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "jest": {
+    "verbose": true
+  },
+  "scripts": {
+    "start": "NODE_ENV=production && node ./bin/www.js",
+    "start:dev": "./node_modules/.bin/nodemon --inspect ./bin/www.js",
+    "lint": "eslint . --fix && echo '✔  Your .js files look good.'",
+    "docker": "docker-compose",
+    "postinstall": "husky install",
+    "db:model:create": "./node_modules/.bin/sequelize model:generate --name",
+    "db:migrate": "./node_modules/.bin/sequelize-cli db:migrate --env=default",
+    "db:migrate:create": "./node_modules/.bin/sequelize migration:generate --name",
+    "db:migrate:undo": "./node_modules/.bin/sequelize db:migrate:undo --env=default",
+    "db:migrate:undo:all": "./node_modules/.bin/sequelize db:migrate:undo:all --env=default",
+    "db:seed:create": "./node_modules/.bin/sequelize seed:generate --name",
+    "db:seed:all": "./node_modules/.bin/sequelize db:seed:all --env=default",
+    "db:seed": "./node_modules/.bin/sequelize db:seed --env=default --seed",
+    "db:seed:undo": "./node_modules/.bin/sequelize db:seed:undo --env=default --seed",
+    "db:seed:undo:all": "./node_modules/.bin/sequelize db:seed:undo:all --env=default"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.9.1",
+    "@joi/date": "^2.1.0",
+    "aws-sdk": "^2.917.0",
+    "body-parser": "^1.19.0",
+    "change-case": "^4.1.2",
+    "core-js": "^3.6.5",
+    "cors": "^2.8.5",
+    "cron": "^1.8.2",
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.6",
+    "express-useragent": "^1.0.15",
+    "helmet": "^4.6.0",
+    "http-errors": "^1.8.0",
+    "joi": "^17.4.0",
+    "moment": "^2.29.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.2.5",
+    "object-hash": "^2.2.0",
+    "pug": "^3.0.2",
+    "ramda": "^0.27.1",
+    "ramda-adjunct": "^2.33.0",
+    "sequelize": "^6.6.2",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "chai": "^4.3.4",
+    "eslint": "^7.27.0",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-ramda": "^2.5.1",
+    "faker": "^5.5.3",
+    "husky": "^6.0.0",
+    "mocha": "^8.4.0",
+    "nodemon": "^2.0.7",
+    "nyc": "^15.1.0",
+    "prettier": "^2.3.0",
+    "sequelize-cli": "^6.2.0",
+    "standard-version": "^9.3.0",
+    "supertest": "^6.1.3"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      ".husky/*",
+      "node_modules/*"
+    ],
+    "delay": "500"
+  }
+}
