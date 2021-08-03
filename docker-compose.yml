@@ -36,3 +36,15 @@ services:
       - krispy-kreme-db
     networks:
       - net-krispy-ger
+
+  krispy-kreme-redis:
+    image: redis:4.0.2-alpine
+    mem_limit: 256m
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - "./tmp/env/${NODE_ENV}/redisdata:/data:cached"
+      - "./etc/redis/redis.conf:/usr/local/etc/redis/redis.conf"
+    networks:
+      - net-krispy-ger

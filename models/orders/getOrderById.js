@@ -1,6 +1,10 @@
 const R = require("ramda");
+const { promisify } = require("util");
 const { QueryTypes } = require("sequelize");
 const { db } = require("../../services/database");
+const logger = require("../../services/logger");
+
+const getLogs = promisify(logger.lrange).bind(logger);
 
 const defaultQuerySettings = {
   raw: true,
@@ -54,5 +58,10 @@ module.exports = (id) => {
         }))
       )(orderValues),
     }))
+    .then((value) =>
+      getLogs(`orders:${id}:logs`, 0, -1)
+        .then(R.map(JSON.parse))
+        .then((logs) => ({ ...value, logs }))
+    )
     .then(R.omit(["item", "modifier"]));
 };
