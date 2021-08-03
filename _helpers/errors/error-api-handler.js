@@ -29,8 +29,7 @@ const getHttpCode = (err, httpCode) =>
 
 module.exports = (req, res, next) => {
   res.handleError = (httpCode) => (error) =>
-    R.pipe(
-      throwError,
+    R.pipe(throwError, (err) =>
       res.type("application/json").status(getHttpCode(err, httpCode)).json(err)
     )(error);
   next();
